@@ -1,0 +1,14 @@
+[run]
+source = drf_recaptcha_field
+branch = true
+
+[report]
+exclude_lines =
+    raise NotImplementedError
+omit =
+    tests/*
+    *.tox*
+    *conftest*
+    *compat.py
+    setup.py
+show_missing = true

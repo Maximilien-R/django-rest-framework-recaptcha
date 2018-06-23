@@ -1,0 +1,96 @@
+version: "3.6"
+
+services:
+  format:
+    build:
+      context: .
+      args:
+        - target=.[formatting]
+    command: black -l 79 --py36 drf_recaptcha_field
+    volumes:
+      - .:/usr/src/app
+
+  check-format:
+    build:
+      context: .
+      args:
+        - target=.[formatting]
+    command: black -l 79 --py36 --check drf_recaptcha_field
+
+  style:
+    build:
+      context: .
+      args:
+        - target=.[style]
+    command: flake8 drf_recaptcha_field
+
+  complexity:
+    build:
+      context: .
+      args:
+        - target=.[complexity]
+    command: xenon --max-absolute B --max-modules A --max-average A drf_recaptcha_field
+
+  test-unit:
+    build:
+      context: .
+      args:
+        - target=.[testing]
+    command: py.test -s tests/unit -vv --cov . --cov-config .coveragerc --cov-report term-missing --cov-report xml:reports/coverage.xml --cov-report html:reports/coverage.html
+    volumes:
+      - ./reports:/usr/src/app/reports
+
+  test-all:
+    build:
+      context: .
+      args:
+        - target=.[testing]
+    command: tox
+
+  build-docs:
+    build:
+      context: .
+      args:
+        - target=.[documentation]
+    command: /bin/bash -c "sphinx-apidoc -o docs/ drf_recaptcha_field && make -C docs clean && make -C docs html"
+    volumes:
+      - ./:/usr/src/app
+
+  bumpversion-package:
+    build:
+      context: .
+      args:
+        - target=.[versioning]
+    command: [ "bumpversion", "${VERSION_PART-patch}" ]
+    volumes:
+      - ./:/usr/src/app
+
+  build-package:
+    build: .
+    command: python setup.py sdist
+    volumes:
+      - ./:/usr/src/app
+
+  publish-package:
+    build: .
+    command: /bin/bash -c "python setup.py sdist upload && python setup.py bdist_wheel upload"
+    volumes:
+      - ./:/usr/src/app
+
+  generate-translations:
+    build: .
+    command: /bin/bash -c "cd drf_recaptcha_field && django-admin makemessages --locale=${LOCALE}"
+    volumes:
+      - ./:/usr/src/app
+
+  update-translations:
+    build: .
+    command: /bin/bash -c "cd drf_recaptcha_field && django-admin makemessages --all"
+    volumes:
+      - ./:/usr/src/app
+
+  compile-translations:
+    build: .
+    command: /bin/bash -c "cd drf_recaptcha_field && django-admin compilemessages"
+    volumes:
+      - ./:/usr/src/app

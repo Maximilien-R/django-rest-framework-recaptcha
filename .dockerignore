@@ -1,0 +1,6 @@
+.*
+!.bumpversion.cfg
+!.coveragerc
+!.flake8
+docs
+reports

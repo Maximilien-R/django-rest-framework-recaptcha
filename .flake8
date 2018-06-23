@@ -1,0 +1,8 @@
+[flake8]
+exclude =
+    .git
+    docs/conf.py
+    build
+    dist
+    .tox
+max-line-length = 79
