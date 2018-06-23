@@ -1,0 +1,85 @@
+sudo: false
+
+language: python
+
+cache: pip
+
+matrix:
+  fast_finish: true
+  include:
+    - python: 3.6
+      env: TOXENV=format
+    - python: 3.6
+      env: TOXENV=style
+    - python: 3.6
+      env: TOXENV=complexity
+
+    - python: 2.7
+      env: TOXENV=drf35-py27-django110
+    - python: 2.7
+      env: TOXENV=drf36-py27-django110
+    - python: 2.7
+      env: TOXENV=drf37-py27-django110
+    - python: 2.7
+      env: TOXENV=drf37-py27-django111
+    - python: 2.7
+      env: TOXENV=drf38-py27-django110
+    - python: 2.7
+      env: TOXENV=drf38-py27-django111
+
+    - python: 3.4
+      env: TOXENV=drf34-py34-django110
+    - python: 3.4
+      env: TOXENV=drf35-py34-django110
+    - python: 3.4
+      env: TOXENV=drf36-py34-django110
+    - python: 3.4
+      env: TOXENV=drf37-py34-django110
+    - python: 3.4
+      env: TOXENV=drf37-py34-django111
+    - python: 3.4
+      env: TOXENV=drf38-py34-django110
+    - python: 3.4
+      env: TOXENV=drf38-py34-django111
+    - python: 3.4
+      env: TOXENV=drf37-py34-django20
+    - python: 3.4
+      env: TOXENV=drf38-py34-django20
+
+    - python: 3.5
+      env: TOXENV=drf34-py35-django110
+    - python: 3.5
+      env: TOXENV=drf35-py35-django110
+    - python: 3.5
+      env: TOXENV=drf36-py35-django110
+    - python: 3.5
+      env: TOXENV=drf37-py35-django110
+    - python: 3.5
+      env: TOXENV=drf37-py35-django111
+    - python: 3.5
+      env: TOXENV=drf38-py35-django110
+    - python: 3.5
+      env: TOXENV=drf38-py35-django111
+    - python: 3.5
+      env: TOXENV=drf37-py35-django20
+    - python: 3.5
+      env: TOXENV=drf38-py35-django20
+
+    - python: 3.6
+      env: TOXENV=drf37-py36-django110
+    - python: 3.6
+      env: TOXENV=drf37-py36-django111
+    - python: 3.6
+      env: TOXENV=drf38-py36-django110
+    - python: 3.6
+      env: TOXENV=drf38-py36-django111
+    - python: 3.6
+      env: TOXENV=drf37-py36-django20
+    - python: 3.6
+      env: TOXENV=drf38-py36-django20
+
+install:
+  - pip install tox
+
+script:
+  - tox
