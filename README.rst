@@ -8,8 +8,9 @@ DRF reCAPTCHA field Package
 .. image:: https://travis-ci.org/Maximilien-R/django-drf-recaptcha-field.svg?branch=master
     :target: https://travis-ci.org/Maximilien-R/django-drf-recaptcha-field
 
-.. image:: https://codecov.io/gh/Maximilien-R/django-drf-recaptcha-field/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/Maximilien-R/django-drf-recaptcha-field
+.. image:: https://coveralls.io/repos/github/Maximilien-R/django-drf-recaptcha-field/badge.svg?branch=master
+    :target: https://coveralls.io/github/Maximilien-R/django-drf-recaptcha-field?branch=master
+
 
 DRF reCAPTCHA field provides you a serializer field to handle and validate
 Google reCAPTCHA response.
