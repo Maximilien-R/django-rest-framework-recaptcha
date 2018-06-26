@@ -146,8 +146,17 @@ def test_recaptchavalidator_set_context():
     assert validator._client_ip == "172.10.20.3"
 
 
-def test_recaptchavalidator_get_recaptcha_response():
+@pytest.mark.parametrize("field", [
+    mock.Mock(context={"request": mock.Mock(META={})}),
+    mock.Mock(
+        context={
+            "request": mock.Mock(META={"HTTP_X_FORWARDED_FOR": "172.10.20.3"})
+        }
+    ),
+])
+def test_recaptchavalidator_get_recaptcha_response(field):
     validator = validators.ReCaptchaValidator()
+    validator.set_context(field)
 
     cm = mock.MagicMock()
     cm.decode.return_value = '{"success": true}'
@@ -173,13 +182,29 @@ def test_recaptchavalidator_get_recaptcha_response():
 
             read_mock.return_value.decode.assert_called_once_with("utf-8")
 
-        urlencode_mock.assert_called_once_with(
-            {"secret": "DRF_RECAPTCHA_FIELD_SECRET_KEY", "response": "token"}
-        )
+
+        urlencode_data = {
+            "secret": "DRF_RECAPTCHA_FIELD_SECRET_KEY",
+            "response": "token",
+        }
+        if field.context["request"].META:
+            urlencode_data["remoteip"] = (
+                field.context["request"].META["HTTP_X_FORWARDED_FOR"]
+            )
+        urlencode_mock.assert_called_once_with(urlencode_data)
 
 
-def test_recaptchavalidator_get_recaptcha_response_throw_exception():
+@pytest.mark.parametrize("field", [
+    mock.Mock(context={"request": mock.Mock(META={})}),
+    mock.Mock(
+        context={
+            "request": mock.Mock(META={"HTTP_X_FORWARDED_FOR": "172.10.20.3"})
+        }
+    ),
+])
+def test_recaptchavalidator_get_recaptcha_response_throw_exception(field):
     validator = validators.ReCaptchaValidator()
+    validator.set_context(field)
 
     with mock.patch.object(
         validators, "urlencode", return_value="encoded"
@@ -192,7 +217,14 @@ def test_recaptchavalidator_get_recaptcha_response_throw_exception():
             urlopen_mock.assert_called_once_with(
                 "DRF_RECAPTCHA_FIELD_VERIFY_ENDPOINT", b"encoded"
             )
-        urlencode_mock.assert_called_once_with(
-            {"secret": "DRF_RECAPTCHA_FIELD_SECRET_KEY", "response": "token"}
-        )
+
+        urlencode_data = {
+            "secret": "DRF_RECAPTCHA_FIELD_SECRET_KEY",
+            "response": "token",
+        }
+        if field.context["request"].META:
+            urlencode_data["remoteip"] = (
+                field.context["request"].META["HTTP_X_FORWARDED_FOR"]
+            )
+        urlencode_mock.assert_called_once_with(urlencode_data)
     assert "The request is invalid or malformed" in str(excinfo.value)
