@@ -81,6 +81,9 @@ class ReCaptchaValidator(object):
         :return: dict
         """
         values = {"secret": self._secret_key, "response": value}
+        if self._client_ip:
+            values["remoteip"] = self._client_ip
+
         data = urlencode(values).encode("ascii")
 
         try:
