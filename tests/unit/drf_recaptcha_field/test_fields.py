@@ -64,6 +64,11 @@ def test_recaptchafield_has_recaptcha_validator():
             {"success": False, "error-codes": ["missing-input-secret"]},
             "missing-input-secret",
         ),
+        (
+            {"timeout-or-duplicate": "timeout-or-duplicate"},
+            {"success": False, "error-codes": ["timeout-or-duplicate"]},
+            "timeout-or-duplicate",
+        ),
     ]
 )
 def test_recaptchafield_validation_default_error_messages_error(
@@ -113,6 +118,11 @@ def test_recaptchafield_validation_default_error_messages_error(
             {"missing-input-secret": "missing-input-secret"},
             {"success": False, "error-codes": ["missing-input-secret"]},
             "missing-input-secret",
+        ),
+        (
+            {"timeout-or-duplicate": "timeout-or-duplicate"},
+            {"success": False, "error-codes": ["timeout-or-duplicate"]},
+            "timeout-or-duplicate",
         ),
     ]
 )

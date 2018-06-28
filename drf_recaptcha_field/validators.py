@@ -19,6 +19,10 @@ _ERROR_MESSAGES = {
     "invalid-input-secret": _("The secret parameter is invalid or malformed."),
     "missing-input-response": _("The response parameter is missing."),
     "missing-input-secret": _("The secret parameter is missing."),
+    "timeout-or-duplicate": _(
+        "The request has timed out or the response parameter has already "
+        "been used."
+    ),
 }
 
 
