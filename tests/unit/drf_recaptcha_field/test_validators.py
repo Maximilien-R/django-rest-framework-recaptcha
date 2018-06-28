@@ -98,6 +98,12 @@ def test_recaptchavalidator_call_improperly_configured(
         ),
         (
             {},
+            {"success": False, "error-codes": ["timeout-or-duplicate"]},
+            "The request has timed out or the response parameter has already "
+            "been used.",
+        ),
+        (
+            {},
             {
                 "success": False,
                 "error-codes": ["missing-input-secret", "bad-request"],
@@ -128,6 +134,11 @@ def test_recaptchavalidator_call_improperly_configured(
             {"missing-input-secret": "missing-input-secret"},
             {"success": False, "error-codes": ["missing-input-secret"]},
             "missing-input-secret",
+        ),
+        (
+            {"timeout-or-duplicate": "timeout-or-duplicate"},
+            {"success": False, "error-codes": ["timeout-or-duplicate"]},
+            "timeout-or-duplicate",
         ),
     ],
 )
