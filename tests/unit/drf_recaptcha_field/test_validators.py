@@ -41,25 +41,30 @@ def test_recaptchavalidator_call_improperly_configured(
 
 
 @pytest.mark.parametrize(
-    ("recaptcha_response", "expected_error"),
+    ("messages", "recaptcha_response", "expected_error"),
     [
         (
+            {},
             {},
             "The request is invalid or malformed."
         ),
         (
+            {},
             {"success": False},
             "The request is invalid or malformed."
         ),
         (
+            {},
             {"success": False, "error-codes": []},
             "The request is invalid or malformed.",
         ),
         (
+            {},
             {"success": False, "error-codes": ["unknown"]},
             "The request is invalid or malformed.",
         ),
         (
+            {},
             {
                 "success": False,
                 "error-codes": ["unknown", "invalid-input-response"],
@@ -67,38 +72,69 @@ def test_recaptchavalidator_call_improperly_configured(
             "The request is invalid or malformed.",
         ),
         (
+            {},
             {"success": False, "error-codes": ["bad-request"]},
             "The request is invalid or malformed.",
         ),
         (
+            {},
             {"success": False, "error-codes": ["invalid-input-response"]},
             "The response parameter is invalid or malformed.",
         ),
         (
+            {},
             {"success": False, "error-codes": ["invalid-input-secret"]},
             "The secret parameter is invalid or malformed.",
         ),
         (
+            {},
             {"success": False, "error-codes": ["missing-input-response"]},
             "The response parameter is missing.",
         ),
         (
+            {},
             {"success": False, "error-codes": ["missing-input-secret"]},
             "The secret parameter is missing.",
         ),
         (
+            {},
             {
                 "success": False,
                 "error-codes": ["missing-input-secret", "bad-request"],
             },
             "The secret parameter is missing.",
         ),
+        (
+            {"bad-request": "bad-request"},
+            {"success": False, "error-codes": ["bad-request"]},
+            "bad-request",
+        ),
+        (
+            {"invalid-input-response": "invalid-input-response"},
+            {"success": False, "error-codes": ["invalid-input-response"]},
+            "invalid-input-response",
+        ),
+        (
+            {"invalid-input-secret": "invalid-input-secret"},
+            {"success": False, "error-codes": ["invalid-input-secret"]},
+            "invalid-input-secret",
+        ),
+        (
+            {"missing-input-response": "missing-input-response"},
+            {"success": False, "error-codes": ["missing-input-response"]},
+            "missing-input-response",
+        ),
+        (
+            {"missing-input-secret": "missing-input-secret"},
+            {"success": False, "error-codes": ["missing-input-secret"]},
+            "missing-input-secret",
+        ),
     ],
 )
 def test_recaptchavalidator_call_validation_error(
-    recaptcha_response, expected_error
+    messages, recaptcha_response, expected_error
 ):
-    validator = validators.ReCaptchaValidator()
+    validator = validators.ReCaptchaValidator(messages=messages)
     validator._get_recaptcha_response = mock.Mock(
         return_value=recaptcha_response
     )
@@ -181,7 +217,6 @@ def test_recaptchavalidator_get_recaptcha_response(field):
             assert read_mock.call_count == 1
 
             read_mock.return_value.decode.assert_called_once_with("utf-8")
-
 
         urlencode_data = {
             "secret": "DRF_RECAPTCHA_FIELD_SECRET_KEY",

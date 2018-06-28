@@ -9,10 +9,10 @@ from django.utils.translation import ugettext_lazy as _
 from drf_recaptcha_field.compat import urlencode, urlopen
 from drf_recaptcha_field.conf import settings
 
-_DEFAULT_ERROR_MESSAGE = _("The request is invalid or malformed.")
+_DEFAULT_ERROR_CODE = "bad-request"
 
 _ERROR_MESSAGES = {
-    "bad-request": _DEFAULT_ERROR_MESSAGE,
+    _DEFAULT_ERROR_CODE: _("The request is invalid or malformed."),
     "invalid-input-response": _(
         "The response parameter is invalid or malformed."
     ),
@@ -27,7 +27,7 @@ class ReCaptchaValidator(object):
     A validator which check the reCAPTCHA response token.
     """
 
-    def __init__(self):
+    def __init__(self, messages=None):
         """
         Initializes the validator with verify API endpoint and reCAPTCHA
         application's secret key.
@@ -39,6 +39,9 @@ class ReCaptchaValidator(object):
             settings, "DRF_RECAPTCHA_FIELD_SECRET_KEY", None
         )
         self._client_ip = None
+
+        self._error_messages = _ERROR_MESSAGES.copy()
+        self._error_messages.update(messages or {})
 
     def __call__(self, value):
         """
@@ -55,11 +58,13 @@ class ReCaptchaValidator(object):
         response = self._get_recaptcha_response(value)
         if not response.get("success", False):
             error_codes = response.get("error-codes", [])
-            if error_codes and error_codes[0] in _ERROR_MESSAGES:
+            if error_codes and error_codes[0] in self._error_messages:
                 raise serializers.ValidationError(
-                    _ERROR_MESSAGES[error_codes[0]]
+                    self._error_messages[error_codes[0]]
                 )
-            raise serializers.ValidationError(_DEFAULT_ERROR_MESSAGE)
+            raise serializers.ValidationError(
+                self._error_messages[_DEFAULT_ERROR_CODE]
+            )
         return value
 
     def set_context(self, serializer_field):
@@ -90,4 +95,6 @@ class ReCaptchaValidator(object):
             with urlopen(self._api_url, data) as handler:
                 return json.loads(handler.read().decode("utf-8"))
         except Exception:
-            raise serializers.ValidationError(_DEFAULT_ERROR_MESSAGE)
+            raise serializers.ValidationError(
+                self._error_messages[_DEFAULT_ERROR_CODE]
+            )

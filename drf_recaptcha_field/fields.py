@@ -16,4 +16,6 @@ class ReCaptchaField(serializers.CharField):
         :param write_only: determines whether or not the field is write only
         """
         super(ReCaptchaField, self).__init__(write_only=write_only, **kwargs)
-        self.validators.append(ReCaptchaValidator())
+        self.validators.append(
+            ReCaptchaValidator(messages=self.error_messages)
+        )
