@@ -46,7 +46,7 @@ setup(
     url="https://github.com/Maximilien-R/django-drf-recaptcha-field",
     license="MIT",
     install_requires=[
-        "django",
+        "django>=1.10",
         "djangorestframework>=3",
         "django-appconf",
         "django-ipware>=2.0.2",
