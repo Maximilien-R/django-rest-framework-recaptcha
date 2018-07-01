@@ -30,16 +30,16 @@ may be raised:
 
 .. _documentation: https://developers.google.com/recaptcha/docs/verify#error-code-reference
 
-======================  ==========================================================================
+======================  ==============================================================
 Error code              Message
-======================  ==========================================================================
+======================  ==============================================================
 missing-input-secret    The secret parameter is missing.
 invalid-input-secret    The secret parameter is invalid or malformed.
 missing-input-response  The response parameter is missing.
 invalid-input-response  The response parameter is invalid or malformed.
 bad-request             The request is invalid or malformed.
-timeout-or-duplicate    The request has timed out or the response parameter has already been used.
-======================  ==========================================================================
+timeout-or-duplicate    The response parameter has timed out or has already been used.
+======================  ==============================================================
 
 Each of these errors are handled by the ``ReCaptchaValidator``. In case of an
 unknown error the ``bad-request`` error will be raised.
