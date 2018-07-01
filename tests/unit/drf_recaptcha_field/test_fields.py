@@ -2,8 +2,8 @@ import pytest
 
 from rest_framework import serializers
 
-from drf_recaptcha_field.fields import ReCaptchaField
-from drf_recaptcha_field.validators import ReCaptchaValidator
+from rest_framework_recaptcha.fields import ReCaptchaField
+from rest_framework_recaptcha.validators import ReCaptchaValidator
 
 try:
     from unittest import mock

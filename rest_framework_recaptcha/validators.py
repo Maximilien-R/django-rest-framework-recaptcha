@@ -6,8 +6,8 @@ from rest_framework import serializers
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
 
-from drf_recaptcha_field.compat import urlencode, urlopen
-from drf_recaptcha_field.conf import settings
+from rest_framework_recaptcha.compat import urlencode, urlopen
+from rest_framework_recaptcha.conf import settings
 
 _DEFAULT_ERROR_CODE = "bad-request"
 
@@ -37,11 +37,9 @@ class ReCaptchaValidator(object):
         application's secret key.
         """
         self._api_url = getattr(
-            settings, "DRF_RECAPTCHA_FIELD_VERIFY_ENDPOINT", None
+            settings, "DRF_RECAPTCHA_VERIFY_ENDPOINT", None
         )
-        self._secret_key = getattr(
-            settings, "DRF_RECAPTCHA_FIELD_SECRET_KEY", None
-        )
+        self._secret_key = getattr(settings, "DRF_RECAPTCHA_SECRET_KEY", None)
         self._client_ip = None
 
         self._error_messages = _ERROR_MESSAGES.copy()
@@ -55,8 +53,8 @@ class ReCaptchaValidator(object):
         """
         if not (self._api_url and self._secret_key):
             raise ImproperlyConfigured(
-                "`DRF_RECAPTCHA_FIELD_VERIFY_ENDPOINT` and "
-                "`DRF_RECAPTCHA_FIELD_SECRET_KEY` should be both defined."
+                "`DRF_RECAPTCHA_VERIFY_ENDPOINT` and "
+                "`DRF_RECAPTCHA_SECRET_KEY` should be both defined."
             )
 
         response = self._get_recaptcha_response(value)

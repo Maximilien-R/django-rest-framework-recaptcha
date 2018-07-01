@@ -1,4 +1,4 @@
-* DRF reCAPTCHA field version:
+* Django REST framework reCAPTCHA version:
 * Django REST framework version:
 * Django version:
 * Python version:

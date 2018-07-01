@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from drf_recaptcha_field.validators import ReCaptchaValidator
+from rest_framework_recaptcha.validators import ReCaptchaValidator
 
 
 class ReCaptchaField(serializers.CharField):
     """
-    reCAPTCHA field to use within a Django REST framework serializer in order
-    to validate a reCAPTCHA response token.
+    reCAPTCHA serializer field to use within a Django REST framework serializer
+    in order to validate a reCAPTCHA response token.
     """
 
     def __init__(self, write_only=True, **kwargs):

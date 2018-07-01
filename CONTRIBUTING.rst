@@ -12,7 +12,7 @@ Types of Contributions
 Report Bugs
 ~~~~~~~~~~~
 
-Report bugs at https://github.com/Maximilien-R/django-drf-recaptcha-field/issues.
+Report bugs at https://github.com/Maximilien-R/django-rest-framework-recaptcha/issues.
 
 If you are reporting a bug, please include:
 
@@ -35,15 +35,15 @@ and "help wanted" is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
-DRF reCAPTCHA field could always use more documentation, whether as part of the
-official DRF reCAPTCHA field docs, in docstrings, or even on the web in blog
-posts, articles, and such.
+Django REST framework reCAPTCHA could always use more documentation, whether
+as part of the official Django REST framework reCAPTCHA docs, in docstrings, or
+even on the web in blog posts, articles, and such.
 
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
 The best way to send feedback is to file an issue at
-https://github.com/Maximilien-R/django-drf-recaptcha-field/issues.
+https://github.com/Maximilien-R/django-rest-framework-recaptcha/issues.
 
 If you are proposing a feature:
 
@@ -55,19 +55,19 @@ If you are proposing a feature:
 Get Started!
 ------------
 
-Ready to contribute? The easiest way to work on ``drf_recaptcha_field`` is to
-use Docker. ``drf_recaptcha_field`` come with a ``Dockerfile`` and a
-``Makefile`` that implements all the needed stuff and helpers to work on this
-project.
+Ready to contribute? The easiest way to work on
+``djangorestframework-recaptcha`` for local development is to use Docker.
+``djangorestframework-recaptcha`` come with a ``Dockerfile`` and a ``Makefile``
+that implements all the needed stuff and helpers to work on this project.
 
 1. Install `Docker <https://docs.docker.com/install/>`_.
-2. Fork the ``drf_recaptcha_field``
-   `GitHub repository <https://github.com/Maximilien-R/django-drf-recaptcha-field>`_.
+2. Fork the ``djangorestframework-recaptcha``
+   `GitHub repository <https://github.com/Maximilien-R/django-rest-framework-recaptcha>`_.
 3. Clone your fork locally:
 
 .. code-block:: console
 
-    $ git clone git@github.com:your_name_here/django-drf-recaptcha-field.git
+    $ git clone git@github.com:your_name_here/django-rest-framework-recaptcha.git
 
 4. Create a branch for local development:
 
@@ -109,7 +109,7 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring.
 3. The pull request should work for Python 2.7, 3.4, 3.5 and 3.6, and for PyPy.
-   Check https://travis-ci.org/Maximilien-R/django-drf-recaptcha-field/pull_requests
+   Check https://travis-ci.org/Maximilien-R/django-rest-framework-recaptcha/pull_requests
    and make sure that the tests pass for all supported Python versions.
 4. Your code need to be formatted. On this project we use the
    `black <https://github.com/ambv/black>`_ code formatter. You can easily

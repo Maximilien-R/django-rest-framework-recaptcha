@@ -1,9 +1,9 @@
-----------------------------------------------
-Welcome to DRF reCAPTCHA field's documentation
-----------------------------------------------
+----------------------------------------------------------
+Welcome to Django REST framework reCAPTCHA's documentation
+----------------------------------------------------------
 
-DRF reCAPTCHA field provides you a serializer field to handle and validate
-Google reCAPTCHA response.
+Django REST framework reCAPTCHA provides you a serializer field to handle and
+validate Google reCAPTCHA response.
 
 See our :doc:`Changelog </history>` for information on updates.
 
@@ -17,8 +17,8 @@ Requirements
 Sources
 =======
 
-``django-drf-recaptcha-field`` is hosted on
-`Github <https://github.com/Maximilien-R/django-drf-recaptcha-field>`_.
+``djangorestframework-recaptcha`` is hosted on
+`Github <https://github.com/Maximilien-R/django-rest-framework-recaptcha>`_.
 
 Index
 =====

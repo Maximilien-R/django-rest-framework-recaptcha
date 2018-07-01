@@ -3,9 +3,9 @@ from django.conf import settings  # noqa: F401
 from appconf import AppConf
 
 
-class DRFReCaptchaFieldConf(AppConf):
+class DRFReCaptchaConf(AppConf):
     """
-    DRF reCAPTCHA settings.
+    Django REST framework reCAPTCHA settings.
     """
 
     VERIFY_ENDPOINT = "https://www.google.com/recaptcha/api/siteverify"
