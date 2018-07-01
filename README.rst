@@ -48,11 +48,22 @@ you through the process.
 .. _pip: https://pip.pypa.io
 .. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
 
-Register and obtain your reCAPTCHA crendentials at
+Once the ``djangorestframework-recaptcha`` installed, add it to your
+``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        ...
+        "rest_framework_recaptcha",
+        ...
+    )
+
+Next, register yourself and obtain your reCAPTCHA credentials at
 https://www.google.com/recaptcha/admin.
 
-Once registered and your reCAPTCHA application created, copy/paste your Google
-reCAPTCHA secret key to the ``DRF_RECAPTCHA_SECRET_KEY`` setting:
+Finally, copy/paste your Google reCAPTCHA secret key to the
+``DRF_RECAPTCHA_SECRET_KEY`` setting:
 
 .. code-block:: python
 
