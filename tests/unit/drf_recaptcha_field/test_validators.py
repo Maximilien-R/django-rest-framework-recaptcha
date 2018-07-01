@@ -99,8 +99,7 @@ def test_recaptchavalidator_call_improperly_configured(
         (
             {},
             {"success": False, "error-codes": ["timeout-or-duplicate"]},
-            "The request has timed out or the response parameter has already "
-            "been used.",
+            "The response parameter has timed out or has already been used.",
         ),
         (
             {},
