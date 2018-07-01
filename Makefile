@@ -1,6 +1,6 @@
 SHELL = /bin/sh
 
-COMPOSE = docker-compose -p drf_recaptcha_field
+COMPOSE = docker-compose -p rest_framework_recaptcha
 
 .PHONY: format
 format:
@@ -41,7 +41,7 @@ down:
 
 .PHONY: clean-docs
 clean-docs:
-	@rm -f docs/drf_recaptcha_field.rst
+	@rm -f docs/rest_framework_recaptcha.rst
 	@rm -f docs/modules.rst
 	@rm -rf docs/_build
 
@@ -52,7 +52,7 @@ docs: clean-docs
 
 .PHONY: get-version
 get-version:
-	@bash -c "cat drf_recaptcha_field/__init__.py | grep \"__version__ = \" | egrep -o \"([0-9]+\\.[0-9]+\\.[0-9]+)\""
+	@bash -c "cat rest_framework_recaptcha/__init__.py | grep \"__version__ = \" | egrep -o \"([0-9]+\\.[0-9]+\\.[0-9]+)\""
 
 .PHONY: bumpversion
 bumpversion:

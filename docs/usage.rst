@@ -1,13 +1,14 @@
 Usage
 =====
 
-To use DRF reCAPTCHA field within your project you'll need to import and add
-the ``ReCaptchaField`` serializer field into the wanted serializer. For example:
+To use Django REST framework reCAPTCHA within your project you'll need to
+import and add the ``ReCaptchaField`` serializer field into the wanted
+serializer. For example:
 
 .. code-block:: python
 
     from rest_framework import serializers
-    from drf_recaptcha_field import ReCaptchaField
+    from rest_framework_recaptcha import ReCaptchaField
 
 
     class MySerializer(serializers.Serializer):
@@ -53,7 +54,7 @@ Each error message can be replaced if needed. For this, you have two options:
 .. code-block:: python
 
     from rest_framework import serializers
-    from drf_recaptcha_field import ReCaptchaField
+    from rest_framework_recaptcha import ReCaptchaField
 
 
     class MyReCaptchaField(ReCaptchaField):
@@ -73,7 +74,7 @@ Each error message can be replaced if needed. For this, you have two options:
 .. code-block:: python
 
     from rest_framework import serializers
-    from drf_recaptcha_field import ReCaptchaField
+    from rest_framework_recaptcha import ReCaptchaField
 
 
     class MySerializer(serializers.Serializer):

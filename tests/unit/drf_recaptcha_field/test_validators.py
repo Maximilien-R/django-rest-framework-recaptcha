@@ -5,7 +5,7 @@ from rest_framework import serializers
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
-from drf_recaptcha_field import validators
+from rest_framework_recaptcha import validators
 
 try:
     from unittest import mock
@@ -17,16 +17,16 @@ except ImportError:
     ("secret_key", "api_url"),
     [
         (None, None),
-        (None, "DRF_RECAPTCHA_FIELD_VERIFY_ENDPOINT"),
-        ("DRF_RECAPTCHA_FIELD_SECRET_KEY", None),
+        (None, "DRF_RECAPTCHA_VERIFY_ENDPOINT"),
+        ("DRF_RECAPTCHA_SECRET_KEY", None),
     ],
 )
 def test_recaptchavalidator_call_improperly_configured(
     monkeypatch, api_url, secret_key
 ):
-    monkeypatch.setattr(settings, "DRF_RECAPTCHA_FIELD_SECRET_KEY", secret_key)
+    monkeypatch.setattr(settings, "DRF_RECAPTCHA_SECRET_KEY", secret_key)
     monkeypatch.setattr(
-        settings, "DRF_RECAPTCHA_FIELD_VERIFY_ENDPOINT", api_url
+        settings, "DRF_RECAPTCHA_VERIFY_ENDPOINT", api_url
     )
 
     validator = validators.ReCaptchaValidator()
@@ -35,8 +35,8 @@ def test_recaptchavalidator_call_improperly_configured(
         validator("token")
 
     assert str(excinfo.value) == (
-        "`DRF_RECAPTCHA_FIELD_VERIFY_ENDPOINT` and "
-        "`DRF_RECAPTCHA_FIELD_SECRET_KEY` should be both defined."
+        "`DRF_RECAPTCHA_VERIFY_ENDPOINT` and "
+        "`DRF_RECAPTCHA_SECRET_KEY` should be both defined."
     )
 
 
@@ -230,7 +230,7 @@ def test_recaptchavalidator_get_recaptcha_response(field):
             read_mock.return_value.decode.assert_called_once_with("utf-8")
 
         urlencode_data = {
-            "secret": "DRF_RECAPTCHA_FIELD_SECRET_KEY",
+            "secret": "DRF_RECAPTCHA_SECRET_KEY",
             "response": "token",
         }
         if field.context["request"].META:
@@ -261,11 +261,11 @@ def test_recaptchavalidator_get_recaptcha_response_throw_exception(field):
             with pytest.raises(serializers.ValidationError) as excinfo:
                 validator._get_recaptcha_response("token")
             urlopen_mock.assert_called_once_with(
-                "DRF_RECAPTCHA_FIELD_VERIFY_ENDPOINT", b"encoded"
+                "DRF_RECAPTCHA_VERIFY_ENDPOINT", b"encoded"
             )
 
         urlencode_data = {
-            "secret": "DRF_RECAPTCHA_FIELD_SECRET_KEY",
+            "secret": "DRF_RECAPTCHA_SECRET_KEY",
             "response": "token",
         }
         if field.context["request"].META:

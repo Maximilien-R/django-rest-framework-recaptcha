@@ -11,7 +11,7 @@ COPY setup.cfg .
 COPY setup.py .
 COPY README.rst .
 COPY HISTORY.rst .
-COPY drf_recaptcha_field/__init__.py drf_recaptcha_field/__init__.py
+COPY rest_framework_recaptcha/__init__.py rest_framework_recaptcha/__init__.py
 
 ARG target=.
 

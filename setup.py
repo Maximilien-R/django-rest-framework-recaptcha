@@ -24,7 +24,7 @@ def _get_version(*file_paths):
     raise RuntimeError("Unable to find version string.")
 
 
-_VERSION = _get_version("drf_recaptcha_field", "__init__.py")
+_VERSION = _get_version("rest_framework_recaptcha", "__init__.py")
 
 with open(os.path.join(_BASE_FILE, "README.rst")) as f:
     _README = f.read().strip()
@@ -36,14 +36,14 @@ with open(os.path.join(_BASE_FILE, "HISTORY.rst")) as f:
 _DESCRIPTION = """reCAPTCHA field for Django REST framework serializers."""
 
 setup(
-    name="drf_recaptcha_field",
+    name="djangorestframework-recaptcha",
     version=_VERSION,
     description=_DESCRIPTION,
     long_description=_README + "\n\n" + _HISTORY,
-    keywords="django drf recaptcha",
+    keywords="django rest framework recaptcha",
     author="Maximilien Raulic",
     author_email="maximilien.raulic@gmail.com",
-    url="https://github.com/Maximilien-R/django-drf-recaptcha-field",
+    url="https://github.com/Maximilien-R/django-rest-framework-recaptcha",
     license="MIT",
     install_requires=[
         "django>=1.10",
@@ -64,7 +64,7 @@ setup(
         ],
         "versioning": ["bumpversion==0.5.3"],
     },
-    packages=find_packages(include=["drf_recaptcha_field"]),
+    packages=find_packages(include=["rest_framework_recaptcha"]),
     include_package_data=True,
     zip_safe=False,
     classifiers=[

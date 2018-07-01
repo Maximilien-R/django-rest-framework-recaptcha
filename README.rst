@@ -1,27 +1,27 @@
-===========================
-DRF reCAPTCHA field Package
-===========================
+===============================
+Django REST framework reCAPTCHA
+===============================
 
-.. image:: https://badge.fury.io/py/django-drf-recaptcha-field.svg
-    :target: https://badge.fury.io/py/django-drf-recaptcha-field
+.. image:: https://badge.fury.io/py/django-rest-framework-recaptcha.svg
+    :target: https://badge.fury.io/py/django-rest-framework-recaptcha
 
-.. image:: https://travis-ci.org/Maximilien-R/django-drf-recaptcha-field.svg?branch=master
-    :target: https://travis-ci.org/Maximilien-R/django-drf-recaptcha-field
+.. image:: https://travis-ci.org/Maximilien-R/django-rest-framework-recaptcha.svg?branch=master
+    :target: https://travis-ci.org/Maximilien-R/django-rest-framework-recaptcha
 
-.. image:: https://coveralls.io/repos/github/Maximilien-R/django-drf-recaptcha-field/badge.svg?branch=master
-    :target: https://coveralls.io/github/Maximilien-R/django-drf-recaptcha-field?branch=master
+.. image:: https://coveralls.io/repos/github/Maximilien-R/django-rest-framework-recaptcha/badge.svg?branch=master
+    :target: https://coveralls.io/github/Maximilien-R/django-rest-framework-recaptcha?branch=master
 
-.. image:: https://readthedocs.org/projects/django-drf-recaptcha-field/badge/?version=latest
-    :target: https://django-drf-recaptcha-field.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/django-rest-framework-recaptcha/badge/?version=latest
+    :target: https://django-rest-framework-recaptcha.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-DRF reCAPTCHA field provides you a serializer field to handle and validate
-Google reCAPTCHA response.
+Django REST framework reCAPTCHA provides you a serializer field to handle and
+validate Google reCAPTCHA response.
 
 Documentation
 -------------
 
-The full documentation is at https://django-drf-recaptcha-field.readthedocs.io.
+The full documentation is at https://django-rest-framework-recaptcha.readthedocs.io.
 
 Requirements
 ------------
@@ -33,14 +33,14 @@ Requirements
 Installation
 ------------
 
-To install DRF reCAPTCHA field, run this command in your terminal:
+To install Django REST framework reCAPTCHA, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install django-drf-recaptcha-field
+    $ pip install djangorestframework-recaptcha
 
-This is the preferred method to install DRF reCAPTCHA field, as it will always
-install the most recent stable release.
+This is the preferred method to install Django REST framework reCAPTCHA, as it
+will always install the most recent stable release.
 
 If you don't have `pip`_ installed, this `Python installation guide`_ can guide
 you through the process.
@@ -52,22 +52,23 @@ Register and obtain your reCAPTCHA crendentials at
 https://www.google.com/recaptcha/admin.
 
 Once registered and your reCAPTCHA application created, copy/paste your Google
-reCAPTCHA secret key to the ``DRF_RECAPTCHA_FIELD_SECRET_KEY`` setting:
+reCAPTCHA secret key to the ``DRF_RECAPTCHA_SECRET_KEY`` setting:
 
 .. code-block:: python
 
-    DRF_RECAPTCHA_FIELD_SECRET_KEY = "<your_reCAPTCHA_secret_key>"
+    DRF_RECAPTCHA_SECRET_KEY = "<your_reCAPTCHA_secret_key>"
 
 Usage
 -----
 
-To use DRF reCAPTCHA field within your project you'll need to import and add
-the ``ReCaptchaField`` serializer field into the wanted serializer. For example:
+To use Django REST framework reCAPTCHA within your project you'll need to
+import and add the ``ReCaptchaField`` serializer field into the wanted
+serializer. For example:
 
 .. code-block:: python
 
     from rest_framework import serializers
-    from drf_recaptcha_field import ReCaptchaField
+    from rest_framework_recaptcha import ReCaptchaField
 
 
     class MySerializer(serializers.Serializer):

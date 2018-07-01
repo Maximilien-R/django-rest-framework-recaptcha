@@ -1,5 +1,5 @@
 [run]
-source = drf_recaptcha_field
+source = rest_framework_recaptcha
 branch = true
 
 [report]
