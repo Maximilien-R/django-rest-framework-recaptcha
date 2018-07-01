@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-20 20:56+0000\n"
+"POT-Creation-Date: 2018-07-01 14:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: validators.py:12
+#: validators.py:15
 msgid "The request is invalid or malformed."
 msgstr "La requête est invalide ou mal formée."
 
@@ -37,3 +37,7 @@ msgstr "Le paramètre secret est invalide ou mal formé."
 #: validators.py:21
 msgid "The secret parameter is missing."
 msgstr "Le paramètre secret est manquant."
+
+#: validators.py:23
+msgid "The response parameter has timed out or has already been used."
+msgstr "Le paramètre de réponse a expiré ou a déjà été utilisé."
