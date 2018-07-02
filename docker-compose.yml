@@ -67,13 +67,25 @@ services:
 
   build-package:
     build: .
-    command: python setup.py sdist
+    command: python setup.py sdist bdist_wheel
+    volumes:
+      - ./:/usr/src/app
+
+  publish-test-package:
+    build:
+      context: .
+      args:
+        - target=.[publishing]
+    command: twine upload --repository-url https://test.pypi.org/legacy/ dist/*
     volumes:
       - ./:/usr/src/app
 
   publish-package:
-    build: .
-    command: /bin/bash -c "python setup.py sdist upload && python setup.py bdist_wheel upload"
+    build:
+      context: .
+      args:
+        - target=.[publishing]
+    command: twine upload dist/*
     volumes:
       - ./:/usr/src/app
 

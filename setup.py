@@ -62,6 +62,7 @@ setup(
             "pytest-django==3.3.0",
             "tox==3.0.0",
         ],
+        "publishing": ["twine==1.11.0"],
         "versioning": ["bumpversion==0.5.3"],
     },
     packages=find_packages(include=["rest_framework_recaptcha"]),
