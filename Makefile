@@ -78,12 +78,17 @@ clean-build:
 clean: clean-pyc clean-build
 
 .PHONY: build
-build: clean
+build: clean compile-translations
 	$(COMPOSE) build build-package
 	$(COMPOSE) run build-package
 
+.PHONY: publish-test
+publish-test: build
+	$(COMPOSE) build publish-test-package
+	$(COMPOSE) run publish-test-package
+
 .PHONY: publish
-publish: clean
+publish: build
 	$(COMPOSE) build publish-package
 	$(COMPOSE) run publish-package
 
