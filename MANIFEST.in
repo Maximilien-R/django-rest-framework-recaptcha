@@ -3,9 +3,8 @@ include CONTRIBUTING.rst
 include HISTORY.rst
 include LICENSE
 include README.rst
-
 recursive-include docs *.rst make.bat *.jpg *.png *.gif
-
+recursive-include rest_framework_recaptcha/locale *.mo
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 recursive-exclude tests *
