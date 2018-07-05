@@ -2,8 +2,8 @@
 Django REST framework reCAPTCHA
 ===============================
 
-.. image:: https://badge.fury.io/py/django-rest-framework-recaptcha.svg
-    :target: https://badge.fury.io/py/django-rest-framework-recaptcha
+.. image:: https://badge.fury.io/py/djangorestframework-recaptcha.svg
+    :target: https://badge.fury.io/py/djangorestframework-recaptcha
 
 .. image:: https://travis-ci.org/Maximilien-R/django-rest-framework-recaptcha.svg?branch=master
     :target: https://travis-ci.org/Maximilien-R/django-rest-framework-recaptcha
