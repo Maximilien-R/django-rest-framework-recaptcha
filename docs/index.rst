@@ -10,9 +10,9 @@ See our :doc:`Changelog </history>` for information on updates.
 Requirements
 ============
 
-* Python: 2.7, 3.4, 3.5, 3.6
-* Django: 1.10, 1.11, 2.0
-* Django REST framework: 3.4, 3.5, 3.6, 3.7, 3.8
+* Python: 2.7, 3.4, 3.5, 3.6, 3.7
+* Django: 1.10, 1.11, 2.0, 2.1
+* Django REST framework: 3.4, 3.5, 3.6, 3.7, 3.8, 3.9
 
 Sources
 =======

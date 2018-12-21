@@ -50,6 +50,7 @@ setup(
         "djangorestframework>=3",
         "django-appconf",
         "django-ipware>=2.0.2",
+        "pytz",
     ],
     extras_require={
         "complexity": ["xenon==0.5.4"],
@@ -70,8 +71,10 @@ setup(
     zip_safe=False,
     classifiers=[
         "Development Status :: 3 - Alpha",
+        "Framework :: Django :: 1.10",
         "Framework :: Django :: 1.11",
         "Framework :: Django :: 2.0",
+        "Framework :: Django :: 2.1",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
         "Natural Language :: English",
@@ -81,5 +84,6 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
     ],
 )
