@@ -40,6 +40,7 @@ setup(
     version=_VERSION,
     description=_DESCRIPTION,
     long_description=_README + "\n\n" + _HISTORY,
+    long_description_content_type="text/x-rst",
     keywords="django rest framework recaptcha",
     author="Maximilien Raulic",
     author_email="maximilien.raulic@gmail.com",
