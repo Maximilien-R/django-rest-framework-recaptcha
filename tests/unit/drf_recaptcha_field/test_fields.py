@@ -32,8 +32,10 @@ def test_recaptchafield_write_only(params, expected):
 
 def test_recaptchafield_has_recaptcha_validator():
     field = ReCaptchaField()
-    assert len(field.validators) == 1
-    assert isinstance(field.validators[0], ReCaptchaValidator)
+
+    nb_validators = len(field.validators)
+    assert nb_validators > 0
+    assert isinstance(field.validators[nb_validators - 1], ReCaptchaValidator)
 
 
 @pytest.mark.parametrize(
@@ -78,10 +80,12 @@ def test_recaptchafield_validation_default_error_messages_error(
         default_error_messages = messages
 
     field = CustomReCaptchaField()
-    assert len(field.validators) == 1
-    assert isinstance(field.validators[0], ReCaptchaValidator)
 
-    field.validators[0]._get_recaptcha_response = mock.Mock(
+    nb_validators = len(field.validators)
+    assert nb_validators > 0
+    assert isinstance(field.validators[nb_validators - 1], ReCaptchaValidator)
+
+    field.validators[nb_validators - 1]._get_recaptcha_response = mock.Mock(
         return_value=recaptcha_response
     )
 
@@ -130,10 +134,12 @@ def test_recaptchafield_validation_messages_error(
     messages, recaptcha_response, expected_error
 ):
     field = ReCaptchaField(error_messages=messages)
-    assert len(field.validators) == 1
-    assert isinstance(field.validators[0], ReCaptchaValidator)
 
-    field.validators[0]._get_recaptcha_response = mock.Mock(
+    nb_validators = len(field.validators)
+    assert nb_validators > 0
+    assert isinstance(field.validators[nb_validators - 1], ReCaptchaValidator)
+
+    field.validators[nb_validators - 1]._get_recaptcha_response = mock.Mock(
         return_value=recaptcha_response
     )
 

@@ -40,6 +40,7 @@ setup(
     version=_VERSION,
     description=_DESCRIPTION,
     long_description=_README + "\n\n" + _HISTORY,
+    long_description_content_type="text/x-rst",
     keywords="django rest framework recaptcha",
     author="Maximilien Raulic",
     author_email="maximilien.raulic@gmail.com",
@@ -50,6 +51,7 @@ setup(
         "djangorestframework>=3",
         "django-appconf",
         "django-ipware>=2.0.2",
+        "pytz",
     ],
     extras_require={
         "complexity": ["xenon==0.5.4"],
@@ -70,8 +72,10 @@ setup(
     zip_safe=False,
     classifiers=[
         "Development Status :: 3 - Alpha",
+        "Framework :: Django :: 1.10",
         "Framework :: Django :: 1.11",
         "Framework :: Django :: 2.0",
+        "Framework :: Django :: 2.1",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
         "Natural Language :: English",
@@ -81,5 +85,6 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
     ],
 )
