@@ -58,6 +58,7 @@ setup(
             "black==18.9b0",
             "bumpversion==0.5.3",
             "flake8==3.6.0",
+            "isort==4.3.4",
             "pytest-cov==2.6.1",
             "pytest-django==3.4.5",
             "pytest==4.1.1",

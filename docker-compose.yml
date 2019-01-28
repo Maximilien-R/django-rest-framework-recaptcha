@@ -20,6 +20,14 @@ services:
     volumes:
       - .:/usr/src/app
 
+  format-imports:
+    <<: *dev-package-volumes
+    command: isort -rc rest_framework_recaptcha/.
+
+  check-format-imports:
+    <<: *dev-package
+    command: isort --check-only -rc rest_framework_recaptcha/.
+
   format:
     <<: *dev-package-volumes
     command: black -l 79 --py36 rest_framework_recaptcha

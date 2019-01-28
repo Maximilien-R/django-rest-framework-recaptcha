@@ -2,15 +2,19 @@ SHELL = /bin/sh
 
 COMPOSE = docker-compose -p rest_framework_recaptcha
 
-.PHONY: format
-format:
-	$(COMPOSE) build format
-	$(COMPOSE) run format
-
 .PHONY: check-format
 check-format:
+	$(COMPOSE) build check-format-imports
+	$(COMPOSE) build check-format-imports
 	$(COMPOSE) build check-format
 	$(COMPOSE) run check-format
+
+.PHONY: format
+format:
+	$(COMPOSE) build format-imports
+	$(COMPOSE) run format-imports
+	$(COMPOSE) build format
+	$(COMPOSE) run format
 
 .PHONY: style
 style: check-format
