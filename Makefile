@@ -44,8 +44,13 @@ security-sast:
 	$(COMPOSE) build security-sast
 	$(COMPOSE) run security-sast
 
+.PHONY: security-dependency-scan
+security-dependency-scan:
+	$(COMPOSE) build security-dependency-scan
+	$(COMPOSE) run security-dependency-scan
+
 .PHONY: security
-security: security-sast
+security: security-sast security-dependency-scan
 
 .PHONY: down
 down:

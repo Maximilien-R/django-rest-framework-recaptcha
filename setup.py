@@ -63,6 +63,7 @@ setup(
             "pytest-cov==2.6.1",
             "pytest-django==3.4.5",
             "pytest==4.1.1",
+            "safety==1.8.4",
             "Sphinx==1.8.3",
             "tox==3.7.0",
             "twine==1.12.1",
