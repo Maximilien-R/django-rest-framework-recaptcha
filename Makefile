@@ -5,7 +5,7 @@ COMPOSE = docker-compose -p rest_framework_recaptcha
 .PHONY: check-format
 check-format:
 	$(COMPOSE) build check-format-imports
-	$(COMPOSE) build check-format-imports
+	$(COMPOSE) run check-format-imports
 	$(COMPOSE) build check-format
 	$(COMPOSE) run check-format
 
