@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-        - target=.[formatting]
+        - target=.[development]
     command: black -l 79 --py36 rest_framework_recaptcha
     volumes:
       - .:/usr/src/app
@@ -14,28 +14,28 @@ services:
     build:
       context: .
       args:
-        - target=.[formatting]
+        - target=.[development]
     command: black -l 79 --py36 --check rest_framework_recaptcha
 
   style:
     build:
       context: .
       args:
-        - target=.[style]
+        - target=.[development]
     command: flake8 rest_framework_recaptcha
 
   complexity:
     build:
       context: .
       args:
-        - target=.[complexity]
+        - target=.[development]
     command: xenon --max-absolute B --max-modules A --max-average A rest_framework_recaptcha
 
   test-unit:
     build:
       context: .
       args:
-        - target=.[testing]
+        - target=.[development]
     command: py.test -s tests/unit -vv --cov . --cov-config .coveragerc --cov-report term-missing --cov-report xml:reports/coverage.xml --cov-report html:reports/coverage.html
     volumes:
       - ./reports:/usr/src/app/reports
@@ -44,14 +44,14 @@ services:
     build:
       context: .
       args:
-        - target=.[testing]
+        - target=.[development]
     command: tox
 
   build-docs:
     build:
       context: .
       args:
-        - target=.[documentation]
+        - target=.[development]
     command: /bin/bash -c "sphinx-apidoc -o docs/ rest_framework_recaptcha && make -C docs clean && make -C docs html"
     volumes:
       - ./:/usr/src/app
@@ -60,7 +60,7 @@ services:
     build:
       context: .
       args:
-        - target=.[versioning]
+        - target=.[development]
     command: [ "bumpversion", "${VERSION_PART-patch}" ]
     volumes:
       - ./:/usr/src/app
@@ -75,7 +75,7 @@ services:
     build:
       context: .
       args:
-        - target=.[publishing]
+        - target=.[development]
     command: twine upload --repository-url https://test.pypi.org/legacy/ dist/*
     volumes:
       - ./:/usr/src/app
@@ -84,7 +84,7 @@ services:
     build:
       context: .
       args:
-        - target=.[publishing]
+        - target=.[development]
     command: twine upload dist/*
     volumes:
       - ./:/usr/src/app
