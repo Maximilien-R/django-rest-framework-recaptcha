@@ -14,8 +14,6 @@ matrix:
   fast_finish: true
   include:
     - python: 3.6
-      env: TOXENV=format
-    - python: 3.6
       env: TOXENV=style
     - python: 3.6
       env: TOXENV=complexity

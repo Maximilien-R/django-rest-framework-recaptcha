@@ -13,7 +13,7 @@ check-format:
 	$(COMPOSE) run check-format
 
 .PHONY: style
-style:
+style: check-format
 	$(COMPOSE) build style
 	$(COMPOSE) run style
 
