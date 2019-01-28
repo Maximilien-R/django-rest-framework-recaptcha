@@ -54,6 +54,10 @@ services:
     <<: *dev-package
     command: tox
 
+  security-sast:
+    <<: *dev-package
+    command: bandit -r rest_framework_recaptcha/.
+
   build-docs:
     <<: *dev-package-volumes
     command: /bin/bash -c "sphinx-apidoc -o docs/ rest_framework_recaptcha && make -C docs clean && make -C docs html"

@@ -17,6 +17,8 @@ matrix:
       env: TOXENV=style
     - python: 3.6
       env: TOXENV=complexity
+    - python: 3.6
+      env: TOXENV=security
 
     - python: 2.7
       env: TOXENV=drf34-py27-django110

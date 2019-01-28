@@ -39,6 +39,14 @@ test-all:
 	$(COMPOSE) build test-all
 	$(COMPOSE) run test-all
 
+.PHONY: security-sast
+security-sast:
+	$(COMPOSE) build security-sast
+	$(COMPOSE) run security-sast
+
+.PHONY: security
+security: security-sast
+
 .PHONY: down
 down:
 	$(COMPOSE) down --volumes --rmi=local

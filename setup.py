@@ -55,6 +55,7 @@ setup(
     ],
     extras_require={
         "development": [
+            "bandit==1.5.1",
             "black==18.9b0",
             "bumpversion==0.5.3",
             "flake8==3.6.0",
