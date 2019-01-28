@@ -1,6 +1,5 @@
-from django.conf import settings  # noqa: F401
-
 from appconf import AppConf
+from django.conf import settings  # noqa: F401
 
 
 class DjangoRestFrameworkRecaptchaConf(AppConf):
