@@ -164,6 +164,7 @@ matrix:
       python: 3.7
       env: TOXENV=drf39-py37-django21
     - stage: deploy alpha version
+      if: type != pull_request AND branch != master
       python: 3.6
       script: skip
       deploy:
@@ -176,3 +177,16 @@ matrix:
         on:
           all_branches: true
           condition: "$TRAVIS_BRANCH != master"
+    - stage: deploy production version
+      if: type != pull_request AND branch = master
+      python: 3.6
+      script: skip
+      deploy:
+        provider: pypi
+        user: Maximilien-R
+        password:
+          secure: dZWY19nbSYy18Fn30YF3rKag35AHWo+0vDCWhUZj2ZQpwbWqMpfD8RqBWej2R1+ccn2xfwJDHannRgwL/wIfmplVca1AVHanLgQzu/nRF4ZQlDx/1mlgG+/V7jxTeMoW9CPS/kRnRke8ArpczQMmjg8Ud0v8//SvQ01WuBkdomhRbDvMTHCYGpaNRDBUCPYXZLVnNyKIwb9cwqXNfO5ce75mDQn8Ye9gcE/6vAlXo/mEjNXGyQLBe8c24PKi469uSil99bGBFB3pA7taxizRb6ZL2quedMEDvw3aimwaUwBiK5kYkg40A2xpbVdj0mUdIVy4vReTCRN8IeyyRX/3YyO+lyfzxe6qL0NOzbYokpFfH+51HHjYU2LOvWw5Dt7/rrnpntlI/FJ4q/k3dUt+XtPA/lxAhpQVA/RHYGjyd+I//a6zAOO8b4gztz0wz/ug+/N7ZaZJ6hv8548xB2mXBH6JO9b39CBWc7LoeoUhhx5fT721SZn/jk5RSOsHsmH+Z0ow7gy/Wxa3ZzKj0KpY9GVp99GcntkdbVaHjaBjr1LArN/L8bRFG/2tWUGdAFo7LVHNy3kakY4MbLk+ZSG9FftmyzjOnc6r8k3Nz3ePEj94BgeD275Jq9RklZsQ2qOyBB9sY8OzgdS8oquRFKf6nqYi92Gl45y34D7Wpc3Fih4=
+        skip_cleanup: true
+        on:
+          branch: master
+          tags: true
