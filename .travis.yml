@@ -10,6 +10,13 @@ cache: pip
     dist: xenial
     sudo: true
 
+install:
+  - pip install tox pyOpenSSL
+  - make set-alpha-version
+
+script:
+  - tox
+
 matrix:
   fast_finish: true
   include:
@@ -156,9 +163,16 @@ matrix:
     - <<: *xenial-mixin
       python: 3.7
       env: TOXENV=drf39-py37-django21
-
-install:
-  - pip install tox
-
-script:
-  - tox
+    - stage: deploy alpha version
+      python: 3.6
+      script: skip
+      deploy:
+        provider: pypi
+        server: https://test.pypi.org/legacy/
+        user: Maximilien-R
+        password:
+          secure: M/RF3Lo5tB0lw1Whli3k8MLoPBQYF5v0rCiLsNqsvSIt/uy7AAIfL+zZs9Tkjo7wFVf5jACahBlVqcnmqlaKVKh++ep2SAUO4vCArIkNco2vqHV8TQTjc6wGKcZwC1GIRqNYnCM9XAUrq4sRE3Tcve4yMOGlirUG1zEn+ZS6J2Hbqk/jWJAfc9LT7r1gYkExWUItqhj6NxcN43wEsrvRwqM1cP2dJGC/tLQdK/mMDk6Cp6ODIYAKIzMOHjX87fUI6CzOsP4H4MdXGUPOfzciFWhdNoyC9I64xZwSil3KD8bY6mbsldh+zPiffYZEB1eRAzBeJpiQmFP6WjlexFFrg9LJiGBh1a06PiO1Rt4HdE1w+EmJBhA2Crh/l0O1x5cMooOZEXV4/ztlGCqQ1Js1MAaPY2uWwRoNENx8gVlovTDfL1bp9t75i69K+pXvHyHfYW+Q14OYb3yNfL2O2O6SumXmWJTysCQBc9rYo2YjrdQo6r09KHanA13w1leh+NmKX5FgT4ivZC3EN6W3tN3MYvt8cyv7fmYtC9CWWVARxgcQy4nn28A/cnheuQTQ1BseVfmhGPJNiXeKsr+pKSXRrR77Y6jP1+iT5HXnGdeBlBbuMCK3QDUQqN/f3Ro9wGSZ1YKurDmrI6A5MOmRnG68ZXbixg0x6gFaxA8e4IaEH2I=
+        skip_cleanup: true
+        on:
+          all_branches: true
+          condition: "$TRAVIS_BRANCH != master"
