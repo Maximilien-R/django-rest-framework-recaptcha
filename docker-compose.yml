@@ -1,108 +1,95 @@
 version: "3.6"
 
 services:
-  format:
-    build:
-      context: .
-      args:
-        - target=.[formatting]
-    command: black -l 79 --py36 rest_framework_recaptcha
+  package: &package
+    build: .
+
+  package-volumes: &package-volumes
+    <<: *package
     volumes:
       - .:/usr/src/app
 
-  check-format:
+  dev-package: &dev-package
     build:
       context: .
       args:
-        - target=.[formatting]
+        - target=.[development]
+
+  dev-package-volumes: &dev-package-volumes
+    <<: *dev-package
+    volumes:
+      - .:/usr/src/app
+
+  format-imports:
+    <<: *dev-package-volumes
+    command: isort -rc rest_framework_recaptcha/.
+
+  check-format-imports:
+    <<: *dev-package
+    command: isort --check-only -rc rest_framework_recaptcha/.
+
+  format:
+    <<: *dev-package-volumes
+    command: black -l 79 --py36 rest_framework_recaptcha
+
+  check-format:
+    <<: *dev-package
     command: black -l 79 --py36 --check rest_framework_recaptcha
 
   style:
-    build:
-      context: .
-      args:
-        - target=.[style]
+    <<: *dev-package
     command: flake8 rest_framework_recaptcha
 
   complexity:
-    build:
-      context: .
-      args:
-        - target=.[complexity]
+    <<: *dev-package
     command: xenon --max-absolute B --max-modules A --max-average A rest_framework_recaptcha
 
   test-unit:
-    build:
-      context: .
-      args:
-        - target=.[testing]
+    <<: *dev-package
     command: py.test -s tests/unit -vv --cov . --cov-config .coveragerc --cov-report term-missing --cov-report xml:reports/coverage.xml --cov-report html:reports/coverage.html
     volumes:
       - ./reports:/usr/src/app/reports
 
   test-all:
-    build:
-      context: .
-      args:
-        - target=.[testing]
+    <<: *dev-package
     command: tox
 
+  security-sast:
+    <<: *dev-package
+    command: bandit -r rest_framework_recaptcha/.
+
+  security-dependency-scan:
+    <<: *dev-package
+    command: safety check
+
   build-docs:
-    build:
-      context: .
-      args:
-        - target=.[documentation]
+    <<: *dev-package-volumes
     command: /bin/bash -c "sphinx-apidoc -o docs/ rest_framework_recaptcha && make -C docs clean && make -C docs html"
-    volumes:
-      - ./:/usr/src/app
 
   bumpversion-package:
-    build:
-      context: .
-      args:
-        - target=.[versioning]
+    <<: *dev-package-volumes
     command: [ "bumpversion", "${VERSION_PART-patch}" ]
-    volumes:
-      - ./:/usr/src/app
 
   build-package:
-    build: .
+    <<: *package-volumes
     command: python setup.py sdist bdist_wheel
-    volumes:
-      - ./:/usr/src/app
 
   publish-test-package:
-    build:
-      context: .
-      args:
-        - target=.[publishing]
+    <<: *dev-package-volumes
     command: twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-    volumes:
-      - ./:/usr/src/app
 
   publish-package:
-    build:
-      context: .
-      args:
-        - target=.[publishing]
+    <<: *dev-package-volumes
     command: twine upload dist/*
-    volumes:
-      - ./:/usr/src/app
 
   generate-translations:
-    build: .
+    <<: *package-volumes
     command: /bin/bash -c "cd rest_framework_recaptcha && django-admin makemessages --locale=${LOCALE}"
-    volumes:
-      - ./:/usr/src/app
 
   update-translations:
-    build: .
+    <<: *package-volumes
     command: /bin/bash -c "cd rest_framework_recaptcha && django-admin makemessages --all"
-    volumes:
-      - ./:/usr/src/app
 
   compile-translations:
-    build: .
+    <<: *package-volumes
     command: /bin/bash -c "cd rest_framework_recaptcha && django-admin compilemessages"
-    volumes:
-      - ./:/usr/src/app

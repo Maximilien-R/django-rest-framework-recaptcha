@@ -1,19 +1,32 @@
+SET_ALPHA_VERSION = 0
+PKG_VERSION := $(shell cat rest_framework_recaptcha/__init__.py | grep "__version__ = " | egrep -o "([0-9]+\\.[0-9]+\\.[0-9]+)")
+ifneq ($(and $(TRAVIS_BRANCH),$(TRAVIS_BUILD_NUMBER)),)
+ifneq ($(TRAVIS_BRANCH), master)
+PKG_VERSION := $(shell echo | awk -v pkg_version="$(PKG_VERSION)" -v travis_build_number="$(TRAVIS_BUILD_NUMBER)" '{print pkg_version "a" travis_build_number}')
+SET_ALPHA_VERSION = 1
+endif
+endif
+
 SHELL = /bin/sh
 
 COMPOSE = docker-compose -p rest_framework_recaptcha
 
-.PHONY: format
-format:
-	$(COMPOSE) build format
-	$(COMPOSE) run format
-
 .PHONY: check-format
 check-format:
+	$(COMPOSE) build check-format-imports
+	$(COMPOSE) run check-format-imports
 	$(COMPOSE) build check-format
 	$(COMPOSE) run check-format
 
+.PHONY: format
+format:
+	$(COMPOSE) build format-imports
+	$(COMPOSE) run format-imports
+	$(COMPOSE) build format
+	$(COMPOSE) run format
+
 .PHONY: style
-style:
+style: check-format
 	$(COMPOSE) build style
 	$(COMPOSE) run style
 
@@ -35,6 +48,19 @@ test-all:
 	$(COMPOSE) build test-all
 	$(COMPOSE) run test-all
 
+.PHONY: security-sast
+security-sast:
+	$(COMPOSE) build security-sast
+	$(COMPOSE) run security-sast
+
+.PHONY: security-dependency-scan
+security-dependency-scan:
+	$(COMPOSE) build security-dependency-scan
+	$(COMPOSE) run security-dependency-scan
+
+.PHONY: security
+security: security-sast security-dependency-scan
+
 .PHONY: down
 down:
 	$(COMPOSE) down --volumes --rmi=local
@@ -53,6 +79,12 @@ docs: clean-docs
 .PHONY: get-version
 get-version:
 	@bash -c "cat rest_framework_recaptcha/__init__.py | grep \"__version__ = \" | egrep -o \"([0-9]+\\.[0-9]+\\.[0-9]+)\""
+
+.PHONY: set-alpha-version
+set-alpha-version:
+ifneq ($(SET_ALPHA_VERSION), 0)
+	bash -c "sed -i \"s@__version__[ ]*=[ ]*[\\\"\'][0-9]\+\\.[0-9]\+\\.[0-9]\+[\\\"\'].*@__version__ = \\\"$(PKG_VERSION)\\\"@\" rest_framework_recaptcha/__init__.py"
+endif
 
 .PHONY: bumpversion
 bumpversion:
