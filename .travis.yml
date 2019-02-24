@@ -185,6 +185,6 @@ matrix:
         provider: pypi
         user: Maximilien-R
         password:
-          secure: dZWY19nbSYy18Fn30YF3rKag35AHWo+0vDCWhUZj2ZQpwbWqMpfD8RqBWej2R1+ccn2xfwJDHannRgwL/wIfmplVca1AVHanLgQzu/nRF4ZQlDx/1mlgG+/V7jxTeMoW9CPS/kRnRke8ArpczQMmjg8Ud0v8//SvQ01WuBkdomhRbDvMTHCYGpaNRDBUCPYXZLVnNyKIwb9cwqXNfO5ce75mDQn8Ye9gcE/6vAlXo/mEjNXGyQLBe8c24PKi469uSil99bGBFB3pA7taxizRb6ZL2quedMEDvw3aimwaUwBiK5kYkg40A2xpbVdj0mUdIVy4vReTCRN8IeyyRX/3YyO+lyfzxe6qL0NOzbYokpFfH+51HHjYU2LOvWw5Dt7/rrnpntlI/FJ4q/k3dUt+XtPA/lxAhpQVA/RHYGjyd+I//a6zAOO8b4gztz0wz/ug+/N7ZaZJ6hv8548xB2mXBH6JO9b39CBWc7LoeoUhhx5fT721SZn/jk5RSOsHsmH+Z0ow7gy/Wxa3ZzKj0KpY9GVp99GcntkdbVaHjaBjr1LArN/L8bRFG/2tWUGdAFo7LVHNy3kakY4MbLk+ZSG9FftmyzjOnc6r8k3Nz3ePEj94BgeD275Jq9RklZsQ2qOyBB9sY8OzgdS8oquRFKf6nqYi92Gl45y34D7Wpc3Fih4=
+          secure: ZsvPA4Q1m3SF5HiJD3cWwySUCKihxlL4l57z3WxCYkXRmVc082DPooum5Wnqy57QXPj2Y6yxIevMBA0Z7MX/nRtqtvmz3b5CH01FWjHtMKb12oiXj5EjwwYSXHyasOBPNELnvB6wVhYDcdQreCOetYwSsnlfAKk2DkPe2T6i1fIVJ3C0MUZ5Tm2ua1ehsNTyxuDRAUz5yjPxlPi5Jzx2oQs0JxUOj/y+YPEfeQUfNl8dOY2JWXlPkQFpoRsFSKJ90anb2dcdAESR4YJD4V4Mp9r/lX1ITi+krY61kplLiZKN6davisIRltyFmO8diXdFWMeHrKfKPnFd6b2So7FBCiA1D3dxvXedkgWhH618zsc2C7+glTmUsPubxNBl8ClofvvWNUZQ/15+HVlCKr7ei9EaBKLUjtlrwNFcq6HVGc9K+YuFszfbvWLRr6z/+vUbI8HS0TX7AMRlq6MqYLO6T0tPCEsZzWToBrU08xINDWN3DJ1Sg0naJ0dL3hym0y/td9ELw6XzVQMRLsWfmGBFhojNnZp/ZwH5sg1tNTRFtDXLGrPJQAsDYfXeP5fLEJc0IakoSHsb0vZr7JA9aHWOXLiY3WrjDLLe+f0gy2vGXkecwPewsbOw87/ZzKM+GX7TA/rRsFzxF1L1vcCfIWzwwJn+7djw++aYWxUvvAFboAc=
         on:
           branch: master
