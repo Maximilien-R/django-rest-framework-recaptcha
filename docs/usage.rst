@@ -8,7 +8,7 @@ serializer. For example:
 .. code-block:: python
 
     from rest_framework import serializers
-    from rest_framework_recaptcha import ReCaptchaField
+    from rest_framework_recaptcha.fields import ReCaptchaField
 
 
     class MySerializer(serializers.Serializer):
@@ -54,7 +54,7 @@ Each error message can be replaced if needed. For this, you have two options:
 .. code-block:: python
 
     from rest_framework import serializers
-    from rest_framework_recaptcha import ReCaptchaField
+    from rest_framework_recaptcha.fields import ReCaptchaField
 
 
     class MyReCaptchaField(ReCaptchaField):
@@ -74,7 +74,7 @@ Each error message can be replaced if needed. For this, you have two options:
 .. code-block:: python
 
     from rest_framework import serializers
-    from rest_framework_recaptcha import ReCaptchaField
+    from rest_framework_recaptcha.fields import ReCaptchaField
 
 
     class MySerializer(serializers.Serializer):
