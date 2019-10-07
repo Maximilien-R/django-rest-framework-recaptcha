@@ -54,3 +54,28 @@ The default value is `https://www.google.com/recaptcha/api/siteverify`
 Secret key of `your reCAPTCHA application <https://www.google.com/recaptcha/admin>`_.
 Don't forget to fill in this settings with your reCAPTCHA application secret
 key.
+
+Environment Variables
+========
+
+``DRF_RECAPTCHA_TEST_MODE``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Set this to **True** in the scope of your TestCase to get
+a mocked valid response. Don't forget to reset the configurations after
+the test ends.
+
+.. code-block:: python
+
+    def test_user_is_being_registered(self):
+        os.environ['DRF_RECAPTCHA_TEST_MODE'] = "True"
+        register_payload = {
+                'username': 'test_user',
+                'email': 'test@test.com',
+                'password': 'testpassword',
+                'password_confirmation': 'testpassword',
+                'captcha': 'dummy_captcha'
+        }
+        response = self.client.post('/api/users/', register_payload ,follow=True)
+        os.environ['DRF_RECAPTCHA_TEST_MODE'] = "False"
+        self.assertEqual(response.status_code, 201)

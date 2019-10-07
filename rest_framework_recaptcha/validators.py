@@ -1,4 +1,5 @@
 import json
+import os
 
 from ipware import get_client_ip
 from rest_framework import serializers
@@ -86,6 +87,17 @@ class ReCaptchaValidator(object):
         :param value: reCAPTCHA response token
         :return: dict
         """
+        # If we are in a testing environment then mock our response.
+        if os.environ.get("DRF_RECAPTCHA_TEST_MODE", None) == "True":
+            # This object represents the Google API response
+            # check: https://developers.google.com/recaptcha/docs/verify#api_response
+            mocked_response = {
+                "success": True,
+                "challenge_ts": '000-000-000',
+                "hostname": "string",
+                "error-codes": [],
+            }
+            return mocked_response
         values = {"secret": self._secret_key, "response": value}
         if self._client_ip:
             values["remoteip"] = self._client_ip
