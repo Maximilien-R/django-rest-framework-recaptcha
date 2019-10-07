@@ -1,3 +1,4 @@
+import os
 import pytest
 
 from rest_framework import serializers
@@ -162,7 +163,6 @@ def test_recaptchavalidator_call__success():
     )
     assert validator("token") == "token"
 
-
 @pytest.mark.parametrize(
     "serializer_field",
     [
@@ -179,6 +179,24 @@ def test_recaptchavalidator_set_context_attributeerror(serializer_field):
     validator.set_context(serializer_field)
     assert validator._client_ip is None
 
+
+def test_recaptchavalidator_is_passing_when_test_mode_is_on():
+    os.environ["DRF_RECAPTCHA_TEST_MODE"] = "True"  # set the envvar for testing
+    mocked_response = {
+        "success": True,
+        "challenge_ts": '000-000-000',
+        "hostname": "string",
+        "error-codes": [],
+    }
+    validator = validators.ReCaptchaValidator()
+    assert validator._get_recaptcha_response(value='dummy_captcha') == mocked_response
+    os.environ["DRF_RECAPTCHA_TEST_MODE"] = "False"  # resenting the envvar to not block other tests
+
+def test_recaptchavalidator_is_raising_validation_error_if_test_mode_is_False():
+    os.environ["DRF_RECAPTCHA_TEST_MODE"] = "False"
+    validator = validators.ReCaptchaValidator()
+    with pytest.raises(serializers.ValidationError):
+        validator._get_recaptcha_response(value="token")
 
 def test_recaptchavalidator_set_context():
     validator = validators.ReCaptchaValidator()
