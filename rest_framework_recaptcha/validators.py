@@ -1,4 +1,5 @@
 import json
+from contextlib import closing
 
 from ipware import get_client_ip
 from rest_framework import serializers
@@ -93,7 +94,7 @@ class ReCaptchaValidator(object):
         data = urlencode(values).encode("ascii")
 
         try:
-            with urlopen(self._api_url, data) as handler:
+            with closing(urlopen(self._api_url, data)) as handler:
                 return json.loads(handler.read().decode("utf-8"))
         except Exception:
             raise serializers.ValidationError(
