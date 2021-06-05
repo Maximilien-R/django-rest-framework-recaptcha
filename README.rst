@@ -79,7 +79,7 @@ serializer. For example:
 .. code-block:: python
 
     from rest_framework import serializers
-    from rest_framework_recaptcha import ReCaptchaField
+    from rest_framework_recaptcha.fields import ReCaptchaField
 
 
     class MySerializer(serializers.Serializer):
