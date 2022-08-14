@@ -26,8 +26,8 @@ The full documentation is at https://django-rest-framework-recaptcha.readthedocs
 Requirements
 ------------
 
-* Python: 2.7, 3.4, 3.5, 3.6, 3.7
-* Django: 1.10, 1.11, 2.0, 2.1
+* Python: 2.7, 3.4, 3.5, 3.6, 3.7, 3.9, 3.10
+* Django: 1.10, 1.11, 2.0, 2.1, 3.0+, 4.0
 * Django REST framework: 3.4, 3.5, 3.6, 3.7, 3.8, 3.9
 
 Installation
@@ -79,7 +79,7 @@ serializer. For example:
 .. code-block:: python
 
     from rest_framework import serializers
-    from rest_framework_recaptcha import ReCaptchaField
+    from rest_framework_recaptcha.fields import ReCaptchaField
 
 
     class MySerializer(serializers.Serializer):
